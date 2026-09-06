@@ -39,11 +39,18 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # dotnet pack 内部先 build 再产包：编译即验证（Avalonia 12.1.1 下能编过才会出包）
+      # 先显式 build 再 pack --no-build：此工程（GeneratePackageOnBuild=True + Avalonia
+      # targets）下 dotnet pack 不会自动触发编译（直接 pack 报 NU5026，上游 azure-pipelines
+      # 也是先 VSBuild 再 dotnet pack 的两段式）。build 失败 / 未产出 DLL 都会在本步显式失败。
       - name: Build & pack
-        run: >
-          dotnet pack Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj
-          -c Release -o artifacts --nologo
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet build Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj -c Release --nologo
+          dll=Source/OxyPlot.Avalonia/bin/Release/netstandard2.0/OxyPlot.Avalonia.dll
+          [ -f "$dll" ] || { echo "FAILED: build produced no DLL at $dll"; exit 1; }
+          dotnet pack Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj -c Release -o artifacts --no-build --nologo
+          ls -la artifacts/
 
       - name: Verify package
         shell: bash
