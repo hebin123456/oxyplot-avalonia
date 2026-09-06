@@ -47,8 +47,10 @@ jobs:
         run: |
           set -euo pipefail
           dotnet build Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj -c Release --nologo
-          dll=Source/OxyPlot.Avalonia/bin/Release/netstandard2.0/OxyPlot.Avalonia.dll
-          [ -f "$dll" ] || { echo "FAILED: build produced no DLL at $dll"; exit 1; }
+          for tfm in net8.0 net10.0; do
+            dll="Source/OxyPlot.Avalonia/bin/Release/$tfm/OxyPlot.Avalonia.dll"
+            [ -f "$dll" ] || { echo "FAILED: build produced no DLL at $dll"; exit 1; }
+          done
           dotnet pack Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj -c Release -o artifacts --no-build --nologo
           ls -la artifacts/
 
@@ -78,9 +80,9 @@ jobs:
               artifacts/*.nupkg \
               --title "OxyPlot.Avalonia $tag" \
               --verify-tag \
-              --notes "Fork build of [oxyplot/oxyplot-avalonia](https://github.com/oxyplot/oxyplot-avalonia), compiled against **Avalonia 12.1.1** (upstream stays on Avalonia 11).
+              --notes "Fork build of [oxyplot/oxyplot-avalonia](https://github.com/oxyplot/oxyplot-avalonia), compiled against **Avalonia 12.1.1** (upstream stays on Avalonia 11 / netstandard2.0).
 
-          **Asset**: \`OxyPlot.Avalonia.2.1.2-avalonia12.1.nupkg\` (netstandard2.0, depends on OxyPlot.Core 2.1.2 from nuget.org)
+          **Asset**: \`OxyPlot.Avalonia.2.1.2-avalonia12.1.nupkg\` (targets net8.0 + net10.0, depends on OxyPlot.Core 2.1.2 from nuget.org)
 
           ForkPlus-Next consumes this via build-time download into a local NuGet source (same pattern as tokei / biturbo):
           \`https://github.com/hebin123456/oxyplot-avalonia/releases/latest/download/OxyPlot.Avalonia.2.1.2-avalonia12.1.nupkg\`

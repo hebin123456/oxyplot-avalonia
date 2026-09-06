@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- Fork：上游 netstandard2.0 + Avalonia 11。Avalonia 12 起只提供 net8.0/net10.0
+         编译资产（无 netstandard2.0），故改为双目标——net8.0 保证 .NET 8+ 消费者可用，
+         net10.0 与 ForkPlus-Next（net10.0）对齐、按 Avalonia 12.1.1 原生编译。 -->
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <PackageId>OxyPlot.Avalonia</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>OxyPlot is a plotting library for .NET. This is a support library for OxyPlot to work with AvaloniaUI.</Description>
