@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>Oxyplot.Avalonia</PackageId>
+    <PackageId>OxyPlot.Avalonia</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>OxyPlot is a plotting library for .NET. This is a support library for OxyPlot to work with AvaloniaUI.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -11,8 +11,11 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>plotting plot charting chart</PackageTags>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/oxyplot/oxyplot.git</RepositoryUrl>
-    <VersionPrefix>2.1.2</VersionPrefix>
+    <RepositoryUrl>https://github.com/hebin123456/oxyplot-avalonia.git</RepositoryUrl>
+    <!-- Fork 版本号：官方 nuget.org 上的 OxyPlot.Avalonia 为 2.1.2（面向 Avalonia 11）。
+         本 fork 按 Avalonia 12 编译，用 -avalonia12.x 预发布后缀区分，
+         确保 NuGet 恢复时只能命中本 fork release 的 nupkg，绝不与官方包混淆。 -->
+    <VersionPrefix>2.1.2-avalonia12.1</VersionPrefix>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 

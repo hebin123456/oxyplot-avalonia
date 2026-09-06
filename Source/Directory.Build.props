@@ -1,6 +1,8 @@
 <Project>
     <PropertyGroup>
-        <AvaloniaVersion>11.0.0</AvaloniaVersion>
+        <!-- Fork（hebin123456/oxyplot-avalonia）：对齐 ForkPlus-Next 的 Avalonia 版本，
+             包以 Avalonia 12.x 为目标编译发布（上游 master 停留在 11.0.0）。 -->
+        <AvaloniaVersion>12.1.1</AvaloniaVersion>
         <OxyPlotCoreVersion>2.1.2</OxyPlotCoreVersion>
     </PropertyGroup>
 </Project>

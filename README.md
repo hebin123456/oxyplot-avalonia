@@ -2,6 +2,19 @@
 
 # OxyPlot.Avalonia
 
+> **Fork 说明（hebin123456/oxyplot-avalonia）**
+>
+> 本 fork 为 [ForkPlus-Next](https://github.com/hebin123456/ForkPlus-Next) 提供按 **Avalonia 12.1.1** 编译的
+> OxyPlot.Avalonia 预编译 NuGet 包（上游 master 停留在 Avalonia 11.0.0，且官方仓库不产出 release 二进制）。
+>
+> - 包版本使用 `-avalonia12.x` 后缀（如 `2.1.2-avalonia12.1`），与 nuget.org 官方 2.1.2 区分，恢复时不会混淆。
+> - 发布方式：push `v*` tag 触发 [release workflow](.github/workflows/release.yml)，构建出的
+>   `OxyPlot.Avalonia.<版本>.nupkg` 自动挂到 GitHub Release。
+> - 消费方式（ForkPlus-Next，与 tokei / biturbo 同模式）：构建期从本仓库 latest release 下载 nupkg
+>   到本地 NuGet 源目录，通过 `PackageReference` 恢复。
+> - 升级流程：改 `Source/Directory.Build.props` 的 `AvaloniaVersion` 与 csproj 的 `VersionPrefix`
+>   → 提交 → 打 tag（如 `v2.1.2-avalonia12.2`）→ workflow 自动发版。
+
 [OxyPlot](https://github.com/oxyplot) is a plotting library for .NET. This [package](https://www.nuget.org/packages/OxyPlot.Avalonia) targets Avalonia applications.
 
 ```
