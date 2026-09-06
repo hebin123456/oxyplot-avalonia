@@ -20,6 +20,9 @@
          确保 NuGet 恢复时只能命中本 fork release 的 nupkg，绝不与官方包混淆。 -->
     <VersionPrefix>2.1.2-avalonia12.1</VersionPrefix>
     <LangVersion>latest</LangVersion>
+    <!-- Avalonia 12 默认启用编译绑定，Themes/Default.axaml 的绑定无 x:DataType 会报
+         AVLN2100 编译失败；关掉保持反射绑定（与上游 Avalonia 11 行为一致）。 -->
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
   <ItemGroup Condition="$(GeneratePackageOnBuild)">
